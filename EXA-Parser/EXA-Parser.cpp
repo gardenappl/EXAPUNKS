@@ -415,34 +415,45 @@ int main(int argc, char* argv[])
 			}
 
 			// Print battle solutions
-			readmeOut << endl << "| Battle";
-			for (int i = 0; i < maxChars - 5 + 3; i++) readmeOut << ' ';
-			readmeOut << "| Wins | Draws | Losses | Rating |" << endl;
-
-			readmeOut << "|";
-			for (int i = 0; i < maxChars + 2 + 3; i++) readmeOut << '-';
-			readmeOut << "|------|-------|--------|--------|" << endl;
-
+			readmeOut << "#### Battles" << endl;
 			for (int i = 0; i < battles.size(); i++) {
 				Info info = dataMap[battles[i]];
 
 				const auto& solutionEntry = solutions.find(battles[i]);
 				if (solutionEntry == solutions.end()) {
-					readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
+					readmeOut << " * " << to_string(i + 1) << ": " << info.title << "- N/A" << endl;
 				} else {
-					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](battles/" << info.path << ") ";
-
-					Solution solution = solutionEntry->second;
-
-					readmeOut << "| ";
-					writeNum(readmeOut, solution.wins, 4);
-					readmeOut << " | ";
-					writeNum(readmeOut, solution.draws, 5);
-					readmeOut << " | ";
-					writeNum(readmeOut, solution.losses, 6);
-					readmeOut << " | S+     |" << endl;
+					readmeOut << " * [" << to_string(i + 1) << ": " << info.title << "](battles/" << info.path << ")" << endl;
 				}
 			}
+			// readmeOut << endl << "| Battle";
+			// for (int i = 0; i < maxChars - 5 + 3; i++) readmeOut << ' ';
+			// readmeOut << "| Wins | Draws | Losses | Rating |" << endl;
+			//
+			// readmeOut << "|";
+			// for (int i = 0; i < maxChars + 2 + 3; i++) readmeOut << '-';
+			// readmeOut << "|------|-------|--------|--------|" << endl;
+			//
+			// for (int i = 0; i < battles.size(); i++) {
+			// 	Info info = dataMap[battles[i]];
+			//
+			// 	const auto& solutionEntry = solutions.find(battles[i]);
+			// 	if (solutionEntry == solutions.end()) {
+			// 		readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
+			// 	} else {
+			// 		readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](battles/" << info.path << ") ";
+			//
+			// 		Solution solution = solutionEntry->second;
+			//
+			// 		readmeOut << "| ";
+			// 		writeNum(readmeOut, solution.wins, 4);
+			// 		readmeOut << " | ";
+			// 		writeNum(readmeOut, solution.draws, 5);
+			// 		readmeOut << " | ";
+			// 		writeNum(readmeOut, solution.losses, 6);
+			// 		readmeOut << " | S+     |" << endl;
+			// 	}
+			// }
 
 			// Print bonus
 			readmeOut << "#### Bonus" << endl;
