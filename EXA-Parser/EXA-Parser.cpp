@@ -397,54 +397,52 @@ int main(int argc, char* argv[])
 
 			for (int i = 0; i < levels.size(); i++) {
 				Info info = dataMap[levels[i]];
-				readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](solutions/" << info.path << ") ";
-
-				int total = maxChars - (1 + info.title.length() + 12 + info.path.length() + 1);
-				for (int j = 0; j < total; j++) readmeOut << ' ';
-
-				if (i < 9) readmeOut << ' ';
-
 				const auto& solutionEntry = solutions.find(levels[i]);
-				if (solutionEntry == solutions.end())
-					continue;
-				Solution solution = solutionEntry->second;
-				readmeOut << "| ";
-				writeNum(readmeOut, solution.cycles, CYCLE_N);
-				readmeOut << " | ";
-				writeNum(readmeOut, solution.size, SIZE_N);
-				readmeOut << " | ";
-				writeNum(readmeOut, solution.activity, ACTIVITY_N);
-				readmeOut << " |" << endl;
+				if (solutionEntry == solutions.end()) {
+					readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
+				} else {
+					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](bonus/" << info.path << ") ";
+
+					Solution solution = solutionEntry->second;
+					readmeOut << "| ";
+					writeNum(readmeOut, solution.cycles, CYCLE_N);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.size, SIZE_N);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.activity, ACTIVITY_N);
+					readmeOut << " |" << endl;
+				}
 			}
 
-			// // Print battle solutions
-			// readmeOut << endl << "| Battle";
-			// for (int i = 0; i < maxChars - 5 + 3; i++) readmeOut << ' ';
-			// readmeOut << "| Wins | Draws | Losses | Rating |" << endl;
-			//
-			// readmeOut << "|";
-			// for (int i = 0; i < maxChars + 2 + 3; i++) readmeOut << '-';
-			// readmeOut << "|------|-------|--------|--------|" << endl;
-			//
-			// for (int i = 0; i < battles.size(); i++) {
-			// 	Info info = dataMap[battles[i]];
-			// 	readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](battles/" << info.path << ") ";
-			//
-			// 	int total = maxChars - (1 + info.title.length() + 10 + info.path.length() + 1);
-			// 	for (int j = 0; j < total; j++) readmeOut << ' ';
-			//
-			// 	const auto& solutionEntry = solutions.find(battles[i]);
-			// 	if (solutionEntry == solutions.end())
-			// 		continue;
-			// 	Solution solution = solutionEntry->second;
-			// 	readmeOut << "| ";
-			// 	writeNum(readmeOut, solution.wins, 4);
-			// 	readmeOut << " | ";
-			// 	writeNum(readmeOut, solution.draws, 5);
-			// 	readmeOut << " | ";
-			// 	writeNum(readmeOut, solution.losses, 6);
-			// 	readmeOut << " | S+     |" << endl;
-			// }
+			// Print battle solutions
+			readmeOut << endl << "| Battle";
+			for (int i = 0; i < maxChars - 5 + 3; i++) readmeOut << ' ';
+			readmeOut << "| Wins | Draws | Losses | Rating |" << endl;
+
+			readmeOut << "|";
+			for (int i = 0; i < maxChars + 2 + 3; i++) readmeOut << '-';
+			readmeOut << "|------|-------|--------|--------|" << endl;
+
+			for (int i = 0; i < battles.size(); i++) {
+				Info info = dataMap[battles[i]];
+
+				const auto& solutionEntry = solutions.find(battles[i]);
+				if (solutionEntry == solutions.end()) {
+					readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
+				} else {
+					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](battles/" << info.path << ") ";
+
+					Solution solution = solutionEntry->second;
+
+					readmeOut << "| ";
+					writeNum(readmeOut, solution.wins, 4);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.draws, 5);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.losses, 6);
+					readmeOut << " | S+     |" << endl;
+				}
+			}
 
 			// Print bonus
 			readmeOut << "#### Bonus" << endl;
@@ -458,24 +456,22 @@ int main(int argc, char* argv[])
 
 			for (int i = 0; i < bonus.size(); i++) {
 				Info info = dataMap[bonus[i]];
-				readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](bonus/" << info.path << ") ";
-
-				int total = maxChars - (1 + info.title.length() + 12 + info.path.length() + 1);
-				for (int j = 0; j < total; j++) readmeOut << ' ';
-
-				if (i < 9) readmeOut << ' ';
 
 				const auto& solutionEntry = solutions.find(bonus[i]);
-				if (solutionEntry == solutions.end())
-					continue;
-				Solution solution = solutionEntry->second;
-				readmeOut << "| ";
-				writeNum(readmeOut, solution.cycles, CYCLE_N);
-				readmeOut << " | ";
-				writeNum(readmeOut, solution.size, SIZE_N);
-				readmeOut << " | ";
-				writeNum(readmeOut, solution.activity, ACTIVITY_N);
-				readmeOut << " |" << endl;
+				if (solutionEntry == solutions.end()) {
+					readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
+				} else {
+					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](bonus/" << info.path << ") ";
+
+					Solution solution = solutionEntry->second;
+					readmeOut << "| ";
+					writeNum(readmeOut, solution.cycles, CYCLE_N);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.size, SIZE_N);
+					readmeOut << " | ";
+					writeNum(readmeOut, solution.activity, ACTIVITY_N);
+					readmeOut << " |" << endl;
+				}
 			}
 		}
 		else if (line == "<!-- EXA_END -->") {
