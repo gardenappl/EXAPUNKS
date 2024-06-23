@@ -1,6 +1,6 @@
 # 10: Unknown Network 1 (Unknown Context)
 
-<div align="center"><img src="EXAPUNKS - UNKNOWN NETWORK 1 (35, 19, 27, 2024-06-23-16-37-30).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - UNKNOWN NETWORK 1 (35, 19, 27, 2024-06-23-16-37-30).gif" /></div>
 
 ## Instructions
 > Find file 276 in the network and bring it back to your host.

@@ -1,6 +1,6 @@
 # 11: UC Berkeley (EECS Department)
 
-<div align="center"><img src="EXAPUNKS - UC Berkeley (128, 48, 7, 2024-06-23-16-38-02).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - UC Berkeley (128, 48, 7, 2024-06-23-16-38-02).gif" /></div>
 
 ## Instructions
 > ﻿Locate the specified host (either *tape-1*, *tape-2*, or *tape-3*), and then locate the specified entry (‗ПАСЬЯНС‗) in the tape backup file in that host (file 200). Create a file in your host containing the entry's data.

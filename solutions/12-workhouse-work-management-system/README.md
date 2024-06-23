@@ -1,6 +1,6 @@
 # 12: Workhouse (Work Management System)
 
-<div align="center"><img src="EXAPUNKS - WorkHouse (344, 58, 2, 2024-06-23-16-38-30).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - WorkHouse (344, 58, 2, 2024-06-23-16-38-30).gif" /></div>
 
 ## Instructions
 > Locate EMBER-2's user file in the *users* host and overwrite it so that the sum of the values is the same but no individual value exceeds $75. All values, except for the last, must be the maximum value ($75). You will need to add additional values to accomplish this.

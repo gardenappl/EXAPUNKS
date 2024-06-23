@@ -1,6 +1,6 @@
 # 9: SFCTA Highway Sign #4902 (Remote Access Interface)
 
-<div align="center"><img src="EXAPUNKS - SFCTA Highway Sign #4902 (151, 15, 1, 2024-06-23-16-37-16).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - SFCTA Highway Sign #4902 (151, 15, 1, 2024-06-23-16-37-16).gif" /></div>
 
 ## Instructions
 > Write EMBER-2's message (file 300) to the highway sign. The file contains one character value for each position on the sign from left to right, top to bottom.

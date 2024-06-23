@@ -1,6 +1,6 @@
 # 18: TEC EXA-Blaster Modem (Radio Stations)
 
-<div align="center"><img src="EXAPUNKS - TEC EXA-Blaster™ Modem (246, 62, 22, 2024-06-23-17-03-33).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - TEC EXA-Blaster™ Modem (246, 62, 22, 2024-06-23-17-03-33).gif" /></div>
 
 ## Instructions
 > ﻿Connect to each radio station and replace every song in the playlist (file 200) with ‗CAN'T (NOT) GET OVER YOU‗ by ‗ME2U‗ (file 300). Each song in a playlist consists of two keywords: the song name and the artist name.

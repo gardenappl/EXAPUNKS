@@ -1,6 +1,6 @@
 # 5: Aberdeen (selenium_wolf)
 
-<div align="center"><img src="EXAPUNKS - Aberdeen (2024-06-23-17-32-48).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - Aberdeen (2024-06-23-17-32-48).gif" /></div>
 
 ## Instructions
 > To win this battle you must occupy a majority of the hosts for as long as possible. You occupy a host if you have more EXAs in it than your opponent.

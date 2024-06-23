@@ -1,6 +1,6 @@
 # 8: Zebros Copies (Point-Of-Sale System)
 
-<div align="center"><img src="EXAPUNKS - Zebros Copies (80, 32, 2, 2024-06-23-16-37-01).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - Zebros Copies (80, 32, 2, 2024-06-23-16-37-01).gif" /></div>
 
 ## Instructions
 > Erase Ghast's debt to the copy shop by zeroing out his balance in the customer database (file 200) and appending a payment to the payment log (file 201) with today's date and the exact amount of his prior balance.

@@ -1,6 +1,6 @@
 # 3: Deadlock's Domain (Deadlock)
 
-<div align="center"><img src="EXAPUNKS - Deadlock's Domain (2024-06-23-17-23-51).mp4" /></div>
+<div align="center"><img src="EXAPUNKS - Deadlock's Domain (2024-06-23-17-23-51).gif" /></div>
 
 ## Instructions
 > To win this battle you must grab files as they spawn in the central hosts and bring them back to your host. 
