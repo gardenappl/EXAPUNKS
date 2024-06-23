@@ -1,6 +1,6 @@
 # 15: Trash World News (Unknown Context)
 
-<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (563, 36, 3, 2024-06-23-16-40-29).gif" /></div>
+<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (563, 36, 3, 2024-06-23-16-40-29).mp4" /></div>
 
 ## Instructions
 > ﻿Find and replace the keywords in the target message (file 212) as directed by EMBER-2.

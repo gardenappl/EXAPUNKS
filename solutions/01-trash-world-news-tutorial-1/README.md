@@ -1,6 +1,6 @@
 # 1: Trash World News (Tutorial 1)
 
-<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (5, 5, 2, 2024-06-23-16-33-49).gif" /></div>
+<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (5, 5, 2, 2024-06-23-16-33-49).mp4" /></div>
 
 ## Instructions
 > Move file 200 to the *outbox*.

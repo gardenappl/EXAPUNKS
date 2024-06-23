@@ -1,6 +1,6 @@
 # 1: KGOG-TV (Programming Hub)
 
-<div align="center"><img src="EXAPUNKS - KGOG-TV (2024-06-23-16-41-03).gif" /></div>
+<div align="center"><img src="EXAPUNKS - KGOG-TV (2024-06-23-16-41-03).mp4" /></div>
 
 ## Instructions
 > To win this battle you must make your movies play for longer than your opponent's. A movie will play when that movie's file is the only movie file sitting in a *channel* host.

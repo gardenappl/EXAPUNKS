@@ -1,6 +1,6 @@
 # 2: Valhalla (=Plastered)
 
-<div align="center"><img src="EXAPUNKS - Valhalla (2024-06-23-17-12-46).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Valhalla (2024-06-23-17-12-46).mp4" /></div>
 
 ## Instructions
 > To win this battle you must control a majority of the hosts for as long as possible. 

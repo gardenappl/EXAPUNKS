@@ -46,8 +46,8 @@ There are not a lot of comments in my code, however there is some indentation so
 | [28: Last Stop Snaxnet (Warehouse 27)](solutions/28-last-stop-snaxnet-warehouse-27) | 177    | 92   | 7        |
 | [29: Mitsuzen HDI-10 (Visual Cortex)](solutions/29-mitsuzen-hdi-10-visual-cortex) | 1498   | 56   | 10       |
 | [30: Holman Dynamics (Sales System)](solutions/30-holman-dynamics-sales-system) | 5619   | 130  | 3        |
-| 31: US Government (Fema Genetic Database) | N/A | N/A | N/A |
-| 32: Unknown Network 2 (Unknown Context) | N/A | N/A | N/A |
+| [31: US Government (Fema Genetic Database)](solutions/31-us-government-fema-genetic-database) | 809    | 126  | 45       |
+| [32: Unknown Network 2 (Unknown Context)](solutions/32-unknown-network-2-unknown-context) | 108    | 74   | 53       |
 | 33: TEC EXA-Blaster Modem (Pager Network) | N/A | N/A | N/A |
 | 34: Mitsuzen HDI-10 (Cerebral Cortex) | N/A | N/A | N/A |
 #### Battles
