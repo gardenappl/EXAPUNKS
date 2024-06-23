@@ -1,6 +1,6 @@
 # 11: UC Berkeley (EECS Department)
 
-<div align="center"><img src="EXAPUNKS - UC Berkeley (165, 48, 7, 2022-12-05-19-21-30).gif" /></div>
+<div align="center"><img src="EXAPUNKS - UC Berkeley (128, 48, 7, 2024-06-23-16-38-02).gif" /></div>
 
 ## Instructions
 > ﻿Locate the specified host (either *tape-1*, *tape-2*, or *tape-3*), and then locate the specified entry (‗ПАСЬЯНС‗) in the tape backup file in that host (file 200). Create a file in your host containing the entry's data.
@@ -14,64 +14,60 @@
 ### [XA](XA.exa) (global)
 ```asm
 GRAB 300
-COPY F X
-DROP
-LINK 800
-MARK FIND_HOST
 LINK 800
 LINK 800
-HOST T
-TEST X = T
-FJMP FIND_HOST
-
-GRAB 200
-SEEK 9999
-MARK FIND_ENTRY
-SEEK -3
-TEST F = M
-TJMP START_COPYING
-COPY 0 M
+LINK 800
+HOST X
+TEST X = F
+TJMP SEND
 SEEK -1
-JUMP FIND_ENTRY
-
-MARK START_COPYING
-COPY 666 M
-COPY F T
-COPY F X
-SEEK -9999
-SEEK T
-COPY X M
-MARK COPYING
-COPY F M
-SUBI X 1 X
-TEST X = 0
-FJMP COPYING
+LINK 800
+LINK 800
+HOST X
+TEST X = F
+TJMP SEND
+SEEK -1
+LINK 800
+LINK 800
+VOID F
+MARK SEND
+  COPY F X
+  WIPE
+  GRAB 200
+  SEEK 9999
+  SEEK -3
+  MARK READ_ENTRY
+    TEST F = X
+    TJMP FOUND_ENTRY
+    SEEK -4
+    JUMP READ_ENTRY
+  MARK FOUND_ENTRY
+    COPY F X
+    COPY F T
+    COPY T M
+    SEEK -9999
+    SEEK X
+    MARK SEND_X
+      COPY F M
+      SUBI T 1 T
+      TJMP SEND_X
+DROP
+HALT
 ```
 
 ### [XB](XB.exa) (global)
 ```asm
-NOOP
-NOOP
-GRAB 300
-SEEK 1
-COPY F X
-DROP
+COPY M T
 MAKE
-
-MARK SEARCHING
-COPY X M
-TEST M = 666
-FJMP SEARCHING
-
-COPY M X
-MARK COPYING
-COPY M F
-SUBI X 1 X
-TEST X = 0
-FJMP COPYING
+MARK RECV_X
+  COPY M F
+  SUBI T 1 T
+  TJMP RECV_X
+DROP
+HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 165    | 48   | 7        |
+| 128    | 48   | 7        |

@@ -1,6 +1,6 @@
 # 2: Trash World News (Tutorial 2)
 
-<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (7, 6, 2, 2022-12-05-19-19-49).gif" /></div>
+<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (9, 9, 2, 2024-06-23-16-35-04).gif" /></div>
 
 ## Instructions
 > Add the first two values of file 200, multiply the result by the third value, and then subtract the fourth value. Append the result to the end of the file and then move it to the *outbox*.
@@ -15,14 +15,16 @@
 ```asm
 LINK 800
 GRAB 200
-ADDI F F X
+COPY F X
+ADDI X F X
 MULI X F X
 SUBI X F F
 LINK 800
-
+DROP
+HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 7      | 6    | 2        |
+| 9      | 9    | 2        |

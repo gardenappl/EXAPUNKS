@@ -1,6 +1,6 @@
 # 28: Last Stop Snaxnet (Warehouse 27)
 
-<div align="center"><img src="EXAPUNKS - Last Stop SNAXNET (301, 98, 30, 2022-12-05-19-37-37).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Last Stop SNAXNET (177, 92, 7, 2024-06-23-17-30-43).gif" /></div>
 
 ## Instructions
 > An array of five Zippe-type gas centrifuges, ZGC0 through ZGC4, are connected in a cascade configuration.
@@ -9,105 +9,73 @@
 
 ## Solution
 
-### [XB](XB.exa) (global)
+### [XA](XA.exa) (global)
 ```asm
 LINK 800
-LINK 798
-
-MARK FWD_LISTENS
-COPY M X
-COPY X T
-FJMP END
-
-MARK FWD
-LINK 800
-SUBI T 1 T
-TJMP FWD
-COPY 0 #POWR
-COPY 2 M
-COPY X T
-
-MARK BWD
-LINK -1
-SUBI T 1 T
-TJMP BWD
-JUMP FWD_LISTENS
-
-MARK END
-COPY 0 #POWR
-COPY 2 M
-JUMP FWD_LISTENS
-```
-
-### [XD](XD.exa) (local)
-```asm
-LINK 800
+REPL ZGC0_GO
 LINK 799
-
 MAKE
+COPY 5 F
+MARK GET_MAX
+  COPY 0 F
+  COPY #ZGC0 X
+  @REP 4
+  TEST X < #ZGC@{1,1}
+  FJMP NOT_MAX_@{1,1}
+    COPY #ZGC@{1,1} X
+    SEEK -1
+    COPY @{1,1} F
+  MARK NOT_MAX_@{1,1}
+  @END
+  SEEK -1
+  COPY F X
+  SEEK -2
+  SUBI F 1 T
+  @REP 5
+  COPY X M
+  @END
+  FJMP DIE_GET_MAX
+  SEEK -1
+  COPY T F
+  JUMP GET_MAX
+  MARK DIE_GET_MAX
+    WIPE
+    HALT
 
-MARK START
-COPY -1 X
 
-MARK COUNTER
-TEST X = 4
-TJMP SEND
-
-ADDI X 1 X
-TEST M = 1
-FJMP COUNTER
-
-; SAVE COUNTER
-COPY X F
-JUMP COUNTER
-
-MARK SEND
-SEEK -1
-MODE
-COPY F M
-VOID M
-MODE
-COPY 2 M
-JUMP START
-```
-
-### [XA](XA.exa) (local)
-```asm
-LINK 800
-LINK 799
-
-; UNROLL FOR BETTER CYCL
-@REP 5
-MARK TEST@{0,1}
-TEST #ZGC@{0,1} > X
-TJMP COPY@{0,1}
-COPY 0 M
+MARK ZGC0_GO
+  LINK 798
+@REP 4
+  REPL ZGC@{1,1}_GO
+  JUMP CENTRI_WAIT
+MARK ZGC@{1,1}_GO
+  COPY @{1,1} X
+  LINK 800
 @END
-
-MARK TEST5
-TEST X = 0
-TJMP KILL
-VOID M
-COPY 0 X
-JUMP TEST0
-
-@REP 5
-MARK COPY@{0,1}
-COPY #ZGC@{0,1} X
-COPY 1 M
-JUMP TEST@{1,1}
-@END
-
-MARK KILL
-KILL
-GRAB 400
-WIPE
-LINK -1
-LINK 798
-KILL
+MARK CENTRI_WAIT
+  MAKE
+  COPY 0 F
+  SEEK -1
+  MARK WAIT_SIGNAL
+    TEST M = X
+    FJMP AFTER_SIGNAL
+    COPY 0 #POWR
+  MARK AFTER_SIGNAL
+    ADDI F 1 T
+    SEEK -1
+    COPY T F
+    SEEK -1
+    TEST T = 5
+    TJMP DIE_CENTRI
+    @REP 4
+    NOOP
+    @END
+    FJMP WAIT_SIGNAL
+  MARK DIE_CENTRI
+    WIPE
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 301    | 98   | 30       |
+| 177    | 92   | 7        |

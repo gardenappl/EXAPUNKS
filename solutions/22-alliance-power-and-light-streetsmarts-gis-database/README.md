@@ -1,6 +1,6 @@
 # 22: Alliance Power and Light (Streetsmarts GIS Database)
 
-<div align="center"><img src="EXAPUNKS - Alliance Power and Light (44, 45, 44, 2022-12-05-19-35-09).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Alliance Power and Light (37, 31, 40, 2024-06-23-17-23-21).gif" /></div>
 
 ## Instructions
 > Locate the two hosts with the specified hostnames (file 300), which correspond to the target power grid substations. When you've found them, cut the power by writing a value of 0 to #POWR.
@@ -13,74 +13,37 @@
 ```asm
 GRAB 300
 COPY F X
-DROP
-
-LINK 800
-
-LINK 800
-LINK 800
-
-
-MARK DUPE
-REPL CHECK
-LINK 802
-JUMP DUPE
-
-
-MARK CUT_POWER
-COPY M #POWR
-HALT
-
-MARK WALK
-LINK 801
-
-MARK CHECK
-HOST T
-TEST X = T
-TJMP CUT_POWER
-JUMP WALK
-```
-
-### [XB](XB.exa) (global)
-```asm
-NOOP
-NOOP
-NOOP
-
-GRAB 300
-SEEK 1
+REPL START_FIND
 COPY F X
 DROP
 
-LINK 800
-
-LINK 800
-LINK 800
-
-
-MARK DUPE
-REPL CHECK
-LINK 802
-JUMP DUPE
-
-
-MARK CUT_POWER
-COPY 0 M
-COPY 0 #POWR
-HALT
-
-
-MARK WALK
-LINK 801
-
-MARK CHECK
-HOST T
-TEST X = T
-TJMP CUT_POWER
-JUMP WALK
+MARK START_FIND
+  LINK 800
+  REPL START_FIND_R
+  LINK 800
+  REPL FIND
+  LINK 800
+  JUMP FIND
+MARK START_FIND_R
+  REPL FIND
+  LINK 802
+  REPL FIND
+  LINK 802
+MARK FIND
+  HOST T
+  TEST X = T
+  TJMP DISABLE
+    LINK 801
+    JUMP FIND
+  MARK DISABLE
+    @REP 5
+    NOOP
+    @END
+    COPY 0 #POWR
+    HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 44     | 45   | 44       |
+| 37     | 31   | 40       |

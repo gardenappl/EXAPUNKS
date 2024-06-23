@@ -1,6 +1,6 @@
 # 3: Trash World News (Tutorial 3)
 
-<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (11, 12, 4, 2022-12-05-19-19-57).gif" /></div>
+<div align="center"><img src="EXAPUNKS - TRASH WORLD NEWS (11, 15, 4, 2024-06-23-16-35-20).gif" /></div>
 
 ## Instructions
 > File 199 contains exactly two values: a keyword and a number. Create a new file in the *outbox* and copy those two values to it, swapping their order so that the number is first. When you are finished, delete file 199.
@@ -18,6 +18,7 @@ COPY F X
 COPY F M
 COPY X M
 WIPE
+HALT
 ```
 
 ### [XB](XB.exa) (global)
@@ -27,9 +28,11 @@ LINK 800
 MAKE
 COPY M F
 COPY M F
+DROP
+HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 11     | 12   | 4        |
+| 11     | 15   | 4        |

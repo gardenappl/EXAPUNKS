@@ -1,6 +1,6 @@
 # 27: TEC EXA-Blaster Modem (Dataphone Network)
 
-<div align="center"><img src="EXAPUNKS - TEC EXA-Blaster™ Modem (1151, 71, 9, 2022-12-05-19-36-59).gif" /></div>
+<div align="center"><img src="EXAPUNKS - TEC EXA-Blasterâ„¢ Modem (1355, 67, 9, 2024-06-23-17-28-17).gif" /></div>
 
 ## Instructions
 > Using your modem, connect to each dataphone so that EMBER-2 will have a list of valid phone numbers.
@@ -13,68 +13,56 @@
 
 ## Solution
 
-### [XB](XB.exa) (global)
+### [CL](CL.exa) (global)
 ```asm
 GRAB 300
-REPL START
-JUMP COPY_FILE
-
-MARK START
 LINK 800
 
-MAKE
+MARK ENTER_NUM
+  @REP 11
+  COPY F #DIAL
+  @END
+  REPL GET_NUMS
+  SEEK -9999
+  @REP 11
+  VOID F
+  @END
+  TEST MRD
+  FJMP ENTER_NUM
+  VOID M
+  SEEK 9999
+  ADDI X 1 X
+  TEST X = 8
+  COPY T M
+  TJMP CLEANUP
+  MARK ADD_NUM
+    TEST MRD
+    FJMP END_NUM
+    VOID M
+    @REP 11
+    COPY M F
+    @END
+    JUMP ADD_NUM
+  MARK END_NUM
+    SEEK -9999
+    COPY -1 #DIAL
+    JUMP ENTER_NUM
 
-MARK COPY
-TEST M = 1
-FJMP DIAL
-@REP 11
-COPY M F
-@END
-JUMP COPY
-
-MARK DIAL
-SEEK -9999
-MULI X 11 T
-SEEK T
-ADDI X 1 X
-TEST EOF
-TJMP END
-COPY -1 #DIAL
-@REP 11
-COPY F #DIAL
-@END
-
-REPL SEARCH_PHONE
-SEEK 9999
-NOOP
-NOOP
-TEST MRD
-FJMP DIAL
-JUMP COPY
-
+MARK GET_NUMS
+  LINK 800
+  GRAB 200
+  COPY 1 M
+  COPY M T
+  TJMP END
+  MARK SEND_YO
+    COPY F M
+    JUMP SEND_YO
+MARK CLEANUP
+  WIPE
 MARK END
-WIPE
-HALT
-
-MARK SEARCH_PHONE
-LINK 800
-GRAB 200
-
-MARK READ
-SEEK 1
-MARK COPY_FILE
-COPY 1 M
-@REP 11
-COPY F M
-@END
-
-TEST EOF
-FJMP READ
-
-COPY 0 M
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 1151   | 71   | 9        |
+| 1355   | 67   | 9        |

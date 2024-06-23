@@ -1,6 +1,6 @@
 # 25: KGOG-TV (Satellite Uplink)
 
-<div align="center"><img src="EXAPUNKS - KGOG-TV (502, 79, 6, 2022-12-05-19-36-12).gif" /></div>
+<div align="center"><img src="EXAPUNKS - KGOG-TV (375, 89, 8, 2024-06-23-17-25-48).gif" /></div>
 
 ## Instructions
 > Align the satellite dish with the target satellite by setting the azimuth, elevation, and frequency. Then transmit the data from EMBER-2's video (file 301) after encrypting it using the TV station's encryption key (file 199).
@@ -13,121 +13,104 @@
 
 ## Solution
 
-### [XA](XA.exa) (global)
+### [XA](XA.exa) (local)
 ```asm
-; MOVE MOTR
 GRAB 300
 LINK 800
 LINK 799
-
-SEEK 5
-COPY F #FREQ
-
-SEEK -5
-COPY F X
-REPL AZIM
-
 SEEK 1
 COPY F X
-REPL ELEV
-
+REPL AZIMUTH
+SEEK 1
+COPY F X
+SEEK 1
+COPY F T
 WIPE
-HALT
-
-MARK ELEV
-LINK 801
-TEST #ELEV < X
-TJMP ELEV_LESS
-SUBI #ELEV X T
-COPY -1 X
-JUMP LOOP
-MARK ELEV_LESS
-SUBI X #ELEV T
-COPY 1 X
-JUMP LOOP
-
-MARK AZIM
-LINK 800
-TEST #AZIM < X
-TJMP AZIM_LESS
-SUBI #AZIM X T
-COPY -1 X
-JUMP LOOP
-MARK AZIM_LESS
-SUBI X #AZIM T
-COPY 1 X
-
-MARK LOOP
-FJMP END
-SUBI T 1 T
-COPY X #MOTR
-JUMP LOOP
-
-MARK END
-COPY 1 M
+MARK FREQ_ELEVATION
+  COPY T #FREQ
+  LINK 801
+  TEST #ELEV = X
+  TJMP ELEV_DONE
+  TEST #ELEV < X 
+  TJMP ELEV_LOW
+  MARK ELEV_HIGH
+    COPY -1 #MOTR
+    TEST #ELEV = X
+    FJMP ELEV_HIGH
+    JUMP ELEV_DONE
+  MARK ELEV_LOW
+    COPY 1 #MOTR
+    TEST #ELEV = X
+    FJMP ELEV_LOW
+  MARK ELEV_DONE
+    LINK -1
+    COPY 1 M
+    HALT
+MARK AZIMUTH
+  LINK 800
+  TEST #AZIM = X
+  TJMP AZIM_DONE
+  TEST #AZIM < X
+  TJMP AZIM_LOW
+  MARK AZIM_HIGH
+    COPY -1 #MOTR
+    TEST #AZIM = X
+    FJMP AZIM_HIGH
+    JUMP AZIM_DONE
+  MARK AZIM_LOW
+    COPY 1 #MOTR
+    TEST #AZIM = X
+    FJMP AZIM_LOW
+  MARK AZIM_DONE
+    LINK -1
+    COPY 1 M
+    HALT
 ```
 
-### [XB](XB.exa) (global)
+### [XB](XB.exa) (local)
 ```asm
-; TRANSMIT
 GRAB 301
-SEEK 1
 LINK 800
-
-; WAIT FOR MOTR
-VOID M
-VOID M
-
-REPL BROADCAST_KEY
-
+REPL READ_KEY
 LINK 799
-
-; ENCRYPT
-MARK ENCRYPT_LOOP
-COPY 1 M
-COPY M X
-
-SUBI 9999 X T
-TEST F > T
-TJMP ENCRYPT_WRAP
-
-SEEK -1
-ADDI X F #DATA
-
-MARK ENCRYPT_LOOP_END
-TEST EOF
-FJMP ENCRYPT_LOOP
-
-COPY -1 M
-WIPE
-HALT
-
-MARK ENCRYPT_WRAP
-SEEK -1
-SUBI 9999 X T
-SUBI F T T
-SUBI T 1 #DATA
-JUMP ENCRYPT_LOOP_END
-
-
-; BROADCAST
-MARK BROADCAST_KEY
-GRAB 199
-
-MARK BROADCAST_LOOP
-TEST M = -1
-TJMP BROADCAST_END
-COPY F M
-TEST EOF
-FJMP BROADCAST_LOOP
-
-SEEK -9999
-JUMP BROADCAST_LOOP
-
-MARK BROADCAST_END
+VOID M
+VOID M
+MODE
+SEEK 1
+MARK WRITE_DATA
+  COPY 0 M
+  SUBI F 9999 X
+  ADDI X M X
+  TEST X > 0
+  TJMP WRAP
+    ADDI X 9999 #DATA
+    TEST EOF
+    FJMP WRITE_DATA
+    JUMP DATA_END
+  MARK WRAP
+    SUBI X 1 #DATA
+    TEST EOF
+    FJMP WRITE_DATA
+  MARK DATA_END
+    COPY 1 M
+    WIPE
+    HALT
+MARK READ_KEY
+  GRAB 199
+  MODE
+  MARK SEND_KEY
+    COPY M T
+    TJMP KEY_END
+    COPY F M
+    TEST EOF
+    FJMP SEND_KEY
+    SEEK -9999
+    JUMP SEND_KEY
+  MARK KEY_END
+    HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 502    | 79   | 6        |
+| 375    | 89   | 8        |

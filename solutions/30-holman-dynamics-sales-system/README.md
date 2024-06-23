@@ -1,6 +1,6 @@
 # 30: Holman Dynamics (Sales System)
 
-<div align="center"><img src="EXAPUNKS - Holman Dynamics (4459, 119, 7, 2022-12-05-19-38-24).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Holman Dynamics (5619, 130, 3, 2024-06-23-19-54-33).gif" /></div>
 
 ## Instructions
 > Create a file in your host containing the contiguous 16-value sequence from the garbage file (file 199) that is a valid credit card number. There will be exactly one such sequence.
@@ -9,100 +9,149 @@
 
 ## Solution
 
-### [XA](XA.exa) (global)
+### [SD](SD.exa) (global)
 ```asm
 LINK 800
 LINK 802
 LINK 799
 GRAB 199
-
-; FIX EDGE CASE VERY END
-SEEK 9999
-COPY -9999 F
-SEEK -9999
-
-; FIND 16 SEQ
-MARK RESET
-COPY 0 X
-MARK LOOP
-ADDI X 1 X
-TEST F < 0
-TJMP RESET
-
-TEST X > 15
-FJMP LOOP
-
-; FOUND
-SEEK -16
-COPY 0 X
-COPY 0 T
-
-@REP 8
-COPY F M
-ADDI M T T
-SEEK 1
-@END
-
-SEEK -15
-@REP 8
-ADDI T F T
-SEEK 1
-@END
-
-SWIZ T 0001 T
-FJMP VALID
-
-; RESET COUNTER TO -1
-SEEK -1
-COPY 15 X
-JUMP LOOP
-
-
-MARK VALID
-MODE
-REPL DUPE
-SEEK -17
-
-@REP 16
-COPY F M
-@END
-
-SEEK 9999
-SEEK -1
-VOID F
-
-HALT
-
-MARK DUPE
-MAKE
-@REP 16
-COPY M F
-@END
-
-LINK -1
-LINK -1
-LINK -1
-KILL
+MARK READ_ODD1
+  TEST EOF
+  TJMP READ_END1
+  COPY F X
+  TEST X = -9999
+  TJMP RESET1
+  MULI X 2 X
+  TEST X > 9
+  FJMP SEND_ODD1
+    SUBI X 9 X
+  MARK SEND_ODD1
+  COPY 0 M
+  COPY X M
+MARK READ_EVEN1
+  TEST EOF
+  TJMP READ_END1
+  COPY F X
+  TEST X = -9999
+  TJMP RESET1
+  COPY 0 M
+  COPY X M
+  COPY M T
+  FJMP END
+  JUMP READ_ODD1
+MARK RESET1
+  COPY 1 M
+  JUMP READ_ODD1
+MARK READ_END1
+  COPY 1 M
+  SEEK -9999
+MARK READ_SKIP_1ST
+  TEST EOF
+  TJMP READ_END2
+  COPY F X
+  TEST X = -9999
+  TJMP READ_SKIP_1ST
+MARK READ_ODD2
+  TEST EOF
+  TJMP READ_END2
+  COPY F X
+  TEST X = -9999
+  TJMP RESET2
+  MULI X 2 X
+  TEST X > 9
+  FJMP SEND_ODD2
+    SUBI X 9 X
+  MARK SEND_ODD2
+  COPY 0 M
+  COPY X M
+MARK READ_EVEN2
+  TEST EOF
+  TJMP READ_END2
+  COPY F X
+  TEST X = -9999
+  TJMP RESET2
+  COPY 0 M
+  COPY X M
+  COPY M T
+  FJMP END
+  JUMP READ_ODD2
+MARK RESET2
+  COPY 1 M
+  JUMP READ_SKIP_1ST
+MARK READ_END2
+;SHOULD NOT REACH THIS
+MARK END
+  SEEK -16
+  COPY 16 T
+  MARK END_COPY
+    COPY F M
+    SUBI T 1 T
+    TJMP END_COPY
 ```
 
-### [XB](XB.exa) (global)
+### [CK](CK.exa) (global)
 ```asm
-; TRANSFORM ODD #
-JUMP LOOP
-
-MARK GREATER
-SUBI X 9 M
-
-MARK LOOP
-MULI M 2 X
-TEST X > 9
-TJMP GREATER
-
-COPY X M
-JUMP LOOP
+MAKE
+MARK INIT
+  COPY 16 X
+  MARK INIT_WRITE
+    COPY M T
+    TJMP RESET
+    COPY M F
+    COPY M T
+    TJMP RESET
+    COPY M F
+    SUBI X 2 X
+    TEST X > 0
+    FJMP INIT_WROTE
+    COPY 1 M
+    JUMP INIT_WRITE
+  MARK INIT_WROTE
+  SEEK -9999
+  COPY 16 T
+  MARK INIT_COUNT
+    ADDI X F X
+    SUBI T 1 T
+    TJMP INIT_COUNT
+MARK ROLLING
+  SWIZ X 0001 T
+  COPY T M
+  FJMP FOUND
+  ; REMOVE 2 DIGITS
+  COPY M T
+  TJMP RESET
+  SEEK -9999
+  SUBI X F X
+  SUBI X F X
+  SEEK -2
+  VOID F
+  VOID F
+  ; ADD N+1 DIGIT
+  SEEK 9999
+  COPY M T
+  COPY T F
+  ADDI X T X
+  ; ADD N+2 DIGIT
+  COPY M T
+  TJMP RESET
+  COPY M T
+  COPY T F
+  ADDI X T X
+  JUMP ROLLING
+MARK RESET
+  WIPE
+  MAKE
+  JUMP INIT
+MARK FOUND
+  SEEK -9999
+  COPY 16 T
+  MARK END_COPY
+    COPY M F
+    SUBI T 1 T
+    TJMP END_COPY
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 4459   | 119  | 7        |
+| 5619   | 130  | 3        |

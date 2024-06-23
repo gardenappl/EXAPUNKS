@@ -1,6 +1,6 @@
 # 21: Sawayama Wonderdisc (Drive Controller)
 
-<div align="center"><img src="EXAPUNKS - Sawayama WonderDisc (8294, 58, 124, 2022-12-05-19-33-53).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Sawayama WonderDisc (8291, 54, 63, 2024-06-23-17-18-15).gif" /></div>
 
 ## Instructions
 > Modify your WonderDisc, which normally only plays SSEA region games, to play games from any region.
@@ -15,8 +15,10 @@
 
 ### [XA](XA.exa) (global)
 ```asm
+GRAB 300
+COPY F X
+DROP
 LINK 800
-
 COPY 8 #AUTH
 COPY 0 #AUTH
 COPY 3 #AUTH
@@ -32,67 +34,46 @@ COPY 2 #AUTH
 COPY 5 #AUTH
 COPY 2 #AUTH
 COPY 6 #AUTH
+REPL READ
 
-MARK READ_TRAK
-COPY #TRAK T
-LINK 801
-GRAB T
-
-MARK SEND
-TEST EOF
-TJMP END
-COPY F M
-JUMP SEND
-
-MARK END
-COPY -1 M
-DROP
-LINK -1
-JUMP READ_TRAK
-```
-
-### [XB](XB.exa) (local)
-```asm
 LINK 800
+MARK WRITE
+  MAKE
+  MARK WRITE_FILE
+    COPY M T
+    TJMP WRITE_DAT
+    COPY M T
+    TJMP WRITE_CODE
+  MARK WRITE_END
+    DROP
+    JUMP WRITE
+  MARK WRITE_DAT
+    COPY M F
+    JUMP WRITE_FILE
+  MARK WRITE_CODE
+    COPY X F
+    JUMP WRITE_FILE
 
-MARK START
-MAKE
-
-MARK COPY
-COPY M X
-TEST X = -1
-TJMP END
-COPY X F
-JUMP COPY
-
-MARK END
-LINK 800
-DROP
-LINK -1
-JUMP START
-```
-
-### [XC](XC.exa) (local)
-```asm
-GRAB 300
-LINK 800
-JUMP RELAY
-
-MARK REPLACE
-SEEK -1
-COPY F M
-
-MARK RELAY
-MODE
-COPY M X
-MODE
-TEST X > -2
-FJMP REPLACE
-COPY X M
-JUMP RELAY
+MARK READ
+  COPY #TRAK T
+  LINK 801
+  GRAB T
+  MARK READ_FILE
+    TEST F > -9999
+    COPY T M
+    SEEK -1
+    COPY F M
+    TEST EOF
+    FJMP READ_FILE
+  MARK READ_END
+    COPY 0 M
+    COPY 0 M
+    DROP
+    LINK -1
+  JUMP READ
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 8294   | 58   | 124      |
+| 8291   | 54   | 63       |

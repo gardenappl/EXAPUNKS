@@ -1,6 +1,6 @@
 # 2: Valhalla (=Plastered)
 
-<div align="center"><img src="EXAPUNKS - Valhalla (2022-12-05-19-33-03).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Valhalla (2024-06-23-17-12-46).gif" /></div>
 
 ## Instructions
 > To win this battle you must control a majority of the hosts for as long as possible. 
@@ -17,72 +17,17 @@
 
 ### [XA](XA.exa) (global)
 ```asm
+MARK MAIN
+  @REP 8
+  REPL GO_@{8,-1}
+  @END
+  JUMP MAIN
+@REP 8
+MARK GO_@{8,-1}
 LINK 800
-
-COPY 1 #CTRL
-LINK -1
-
-MARK FORWARD_FIRST
-COPY 1 #CTRL
-LINK 800
-;COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-
-KILL
-
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-
-JUMP BACKWARD
-
-MARK FORWARD
-COPY 1 #CTRL
-LINK 800
-;COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-COPY 1 #CTRL
-LINK 800
-
-
-MARK BACKWARD
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-LINK -1
-COPY 1 #CTRL
-
-JUMP FORWARD
+@END
+MARK WRITE
+  COPY 1 #CTRL
+  JUMP WRITE
 ```
 

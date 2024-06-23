@@ -1,6 +1,6 @@
 # 12: Workhouse (Work Management System)
 
-<div align="center"><img src="EXAPUNKS - WorkHouse (523, 28, 2, 2022-12-05-19-21-45).gif" /></div>
+<div align="center"><img src="EXAPUNKS - WorkHouse (344, 58, 2, 2024-06-23-16-38-30).gif" /></div>
 
 ## Instructions
 > Locate EMBER-2's user file in the *users* host and overwrite it so that the sum of the values is the same but no individual value exceeds $75. All values, except for the last, must be the maximum value ($75). You will need to add additional values to accomplish this.
@@ -17,39 +17,65 @@
 ```asm
 GRAB 300
 COPY F X
-DROP
+WIPE
 LINK 800
 GRAB 199
-MARK FIND_FILE_ID
-TEST F = X
-SEEK 2
-FJMP FIND_FILE_ID
-
-SEEK -1
-COPY F X
-DROP
+MARK READ_NAMES
+  TEST F = X
+  TJMP READ_NAMES_END
+  SEEK 2
+  JUMP READ_NAMES
+MARK READ_NAMES_END
+  SEEK 1
+  COPY F X
+  DROP
 LINK 799
 GRAB X
-
 COPY 0 X
 SEEK 2
-MARK SUM
-ADDI X F X
-TEST EOF
-FJMP SUM
-
-SEEK -9999
-SEEK 2
-MARK OVERWRITE
-COPY 75 F
-SUBI X 75 X
-TEST X < 75
-FJMP OVERWRITE
-
-COPY X F
+MARK READ_FILE
+  ADDI X F X
+  SEEK -1
+  VOID F
+  TEST EOF
+  FJMP READ_FILE
+MARK WRITE_FILE
+  TEST X < 1500
+  TJMP SMALL
+  SUBI X 1500 X
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  COPY 75 F
+  JUMP WRITE_FILE
+MARK SMALL
+  TEST X < 75
+  TJMP REMAINDER
+  SUBI X 75 X
+  COPY 75 F
+  JUMP WRITE_FILE
+MARK REMAINDER
+  COPY X F
+  DROP
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 523    | 28   | 2        |
+| 344    | 58   | 2        |

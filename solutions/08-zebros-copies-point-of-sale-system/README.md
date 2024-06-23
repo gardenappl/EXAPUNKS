@@ -1,6 +1,6 @@
 # 8: Zebros Copies (Point-Of-Sale System)
 
-<div align="center"><img src="EXAPUNKS - Zebros Copies (101, 24, 4, 2022-12-05-19-20-53).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Zebros Copies (80, 32, 2, 2024-06-23-16-37-01).gif" /></div>
 
 ## Instructions
 > Erase Ghast's debt to the copy shop by zeroing out his balance in the customer database (file 200) and appending a payment to the payment log (file 201) with today's date and the exact amount of his prior balance.
@@ -13,37 +13,41 @@
 
 ### [XA](XA.exa) (global)
 ```asm
-LINK 800
-LINK 801
-COPY #DATE X
-LINK -1
-GRAB 201
-SEEK 9999
-COPY X F
-COPY M F
-COPY M F
-COPY M F
-```
-
-### [XB](XB.exa) (global)
-```asm
 GRAB 300
 COPY F X
-DROP
+WIPE
 LINK 800
-GRAB 200
-MARK LOOP
-TEST F = X
-FJMP LOOP
-COPY X M
-COPY F M
-COPY F M
-SEEK -2
-COPY 0 F
-COPY 0 F
+REPL READ_DATE
+  GRAB 200
+  MARK READ_LINE
+    TEST F = X
+    TJMP FOUND
+      SEEK 2
+      JUMP READ_LINE
+    MARK FOUND
+      COPY F X
+      SEEK -1
+      COPY 0 F
+      COPY F T
+      SEEK -1
+      COPY 0 F
+      DROP
+  GRAB 201
+  SEEK 9999
+  COPY M F
+  COPY M F
+  COPY X F
+  COPY T F
+  DROP
+  HALT
+MARK READ_DATE
+  LINK 801
+  COPY #DATE M
+  COPY X M
+  HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 101    | 24   | 4        |
+| 80     | 32   | 2        |

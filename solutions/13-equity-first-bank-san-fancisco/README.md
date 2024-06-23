@@ -1,6 +1,6 @@
 # 13: Equity First Bank (San Fancisco)
 
-<div align="center"><img src="EXAPUNKS - Equity First Bank (4024, 17, 10, 2022-12-05-19-22-11).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Equity First Bank (1461, 36, 10, 2024-06-23-16-39-28).gif" /></div>
 
 ## Instructions
 > Dispense all available cash from all connected ATMs.
@@ -14,24 +14,43 @@
 LINK 800
 LINK 800
 LINK 800
-COPY 800 X
-MARK REPLICATE
-REPL DISPENSE
-ADDI X 1 X
-TEST X = 806
-FJMP REPLICATE
+COPY 7 T
+MARK COPIES
+  SUBI T 1 T
+  ADDI 800 T X
+  FJMP DO_THING
+  REPL DO_THING
+  JUMP COPIES
 
-MARK DISPENSE
-LINK X
-COPY #CASH X
-MARK LOOP
-COPY 20 #DISP
-SUBI X 1 X
-TEST X = 0
-FJMP LOOP
+MARK DO_THING
+  LINK X
+  COPY #CASH X
+  MARK DISP_BIG
+    TEST X < 10
+    TJMP DISP_SMALL
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    COPY 20 #DISP
+    SUBI X 10 X
+    JUMP DISP_BIG
+  MARK DISP_SMALL
+    TEST X < 1
+    TJMP END
+    COPY 20 #DISP
+    SUBI X 1 X
+    JUMP DISP_SMALL
+MARK END
+  HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 4024   | 17   | 10       |
+| 1461   | 36   | 10       |

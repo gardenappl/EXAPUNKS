@@ -1,6 +1,6 @@
 # 17: Digital Library Project (Patron Access System)
 
-<div align="center"><img src="EXAPUNKS - Digital Library Project (1489, 50, 37, 2022-12-05-19-31-17).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Digital Library Project (307, 32, 74, 2024-06-23-17-02-21).gif" /></div>
 
 ## Instructions
 > Books are stored in the host corresponding to the first digit of their call number, while a book's file ID is 200 plus the last two digits of the call number. For example, book 512 would be stored in the host *500-599* as file 212.
@@ -13,76 +13,45 @@
 
 ## Solution
 
-### [XB](XB.exa) (global)
-```asm
-@REP 3
-NOOP
-@END
-
-MARK BOOK
-MODE
-TEST MRD
-FJMP STOP
-
-MAKE
-REPL BOT
-COPY M T
-MODE
-COPY T M
-MODE
-COPY M T
-MODE
-COPY T M
-
-MARK COPY
-TEST MRD
-FJMP END
-COPY M F
-NOOP
-JUMP COPY
-
-MARK END
-DROP
-JUMP BOOK
-
-MARK BOT
-MODE
-LINK 800
-COPY M X
-
-MARK HOST
-LINK 800
-SUBI X 1 X
-TEST X = 0
-FJMP HOST
-
-GRAB M
-MARK COPY_BOT
-COPY F M
-TEST EOF
-FJMP COPY_BOT
-
-MARK STOP
-```
-
 ### [XA](XA.exa) (local)
 ```asm
 GRAB 300
-MARK BOOK
-TEST EOF
-TJMP STOP
-COPY F X
+MARK BOOK_IDS
+  COPY F X
+  REPL GET_BOOK
+  JUMP BOOK_IDS
 
-SWIZ X 0003 M
-SWIZ X 0021 X
-ADDI X 200 M
+MARK GET_BOOK
+  LINK 800
+  SWIZ X 0003 T
+  MARK FIND
+    LINK 800
+    SUBI T 1 T
+    TJMP FIND
+  SWIZ X 0021 T
+  ADDI T 200 T
+  GRAB T
+  REPL WRITE_BOOK
+  MARK READ_BOOK
+    COPY F M
+    JUMP READ_BOOK
 
-JUMP BOOK
-
-MARK STOP
+MARK WRITE_BOOK
+  MAKE
+  MARK RECEIVE_BOOK
+    COPY M F
+    NOOP
+    TEST MRD
+    TJMP RECEIVE_BOOK
+  SWIZ X 0003 T
+  MARK FIND_BAK
+    LINK -1
+    SUBI T 1 T
+    TJMP FIND_BAK
+  LINK -1
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 1489   | 50   | 37       |
+| 307    | 32   | 74       |

@@ -1,6 +1,6 @@
-# 26: Equity First Bank (San Francisco (ATMs Offline)
+# 26: Equity First Bank (San Francisco - ATMs Offline)
 
-<div align="center"><img src="EXAPUNKS - Equity First Bank (113, 52, 6, 2022-12-05-19-36-30).gif" /></div>
+<div align="center"><img src="EXAPUNKS - Equity First Bank (142, 49, 2, 2024-06-23-17-26-46).gif" /></div>
 
 ## Instructions
 > ﻿Move EMBER-2's new account (file 300) into *checking*. Then iterate over the checking accounts listed in the directory (file 199) and, in that order, transfer $1.00 from each target account to EMBER-2's account. Finally, add the file ID of EMBER-2's account file to the end of the directory.
@@ -11,73 +11,62 @@
 
 ## Solution
 
-### [XC](XC.exa) (global)
+### [XA](XA.exa) (global)
 ```asm
 GRAB 301
-SEEK 1
 COPY F X
-REPL DEBIT_BOT
-SEEK -9999
-COPY F X
-DROP
-GRAB 300
-SEEK 9999
-LINK 800
-LINK 800
-
-MARK LOOP
-COPY M T
-COPY T F
-COPY X F
-COPY 1 F
-COPY 0 F
-JUMP LOOP
-
-; REPL: DEBIT ACC
-MARK DEBIT_LOOP
-GRAB M
-MODE
-COPY F M
-MODE
-SEEK 9999
-COPY T F
-COPY X F
-COPY 1 F
-COPY 0 F
-DROP
-JUMP DEBIT_LOOP
-
-MARK DEBIT_BOT
-GRAB 300
 COPY F T
 DROP
+GRAB 300
 LINK 800
 LINK 800
+REPL DIR
+MARK CREDIT
+  COPY M T
+  TJMP CREDIT_END
+  COPY M T
+  COPY F M
+  SEEK 9999
+  COPY T F
+  COPY X F
+  COPY 1 F
+  COPY 0 F
+  SEEK -9999
+  JUMP CREDIT
+MARK CREDIT_END
+  HALT
 
-MODE
-GRAB 199
-REPL DEBIT_LOOP
+MARK DIR
+  COPY T X
+  GRAB 199
+  MARK DIR_READ
+    COPY F T
+    REPL DEBIT
+    COPY 0 M
+    TEST EOF
+    MODE
+    VOID M
+    MODE
+    FJMP DIR_READ
+  MARK DIR_END
+    COPY 1 M
+    COPY 300 F
+    HALT
 
-MARK ITERATE_LOOP
-COPY F M
-TEST EOF
-FJMP ITERATE_LOOP
-
-COPY 300 F
-
-; WAIT UNTIL DONE
-COPY 3 T
-MARK WAIT
-SUBI T 1 T
-FJMP KILL
-JUMP WAIT
-
-MARK KILL
-KILL
-KILL
+MARK DEBIT
+  GRAB T  
+  COPY F M
+  SEEK 9999
+  COPY M F
+  COPY X F
+  COPY 1 F
+  COPY 0 F
+  MODE
+  COPY 1 M
+  HALT
 ```
 
 #### Results
 | Cycles | Size | Activity |
 |--------|------|----------|
-| 113    | 52   | 6        |
+| 142    | 49   | 2        |

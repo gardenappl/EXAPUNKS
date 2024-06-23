@@ -1,6 +1,6 @@
 # 4: The Wormhole (X10X10X)
 
-<div align="center"><img src="EXAPUNKS - The Wormhole (2022-12-05-19-36-44).gif" /></div>
+<div align="center"><img src="EXAPUNKS - The Wormhole (2024-06-23-17-27-22).gif" /></div>
 
 ## Instructions
 > To win this battle you must fill the network's hosts with as many of your EXAs as you can. Note that each pair of test runs has its own unique network layout, with bi-directional links between hosts that use the prime numbers between 2 and 13 as link IDs (2, 3, 5, 7, 11, and 13).
@@ -13,57 +13,38 @@
 
 ## Solution
 
-### [XA](XA.exa) (global)
+### [XA](XA.exa) (local)
 ```asm
-LINK 800
+COPY 800 X
 
-;REPL DUPE_5
-REPL DUPE_11
-
-MARK DUPE_2
-REPL LINK_2
-MARK DUPE_3
-REPL LINK_3
-MARK DUPE_5
-REPL LINK_5
-MARK DUPE_7
-REPL LINK_7
-MARK DUPE_11
-REPL LINK_11
-MARK DUPE_13
-REPL LINK_13
-
-JUMP DUPE_2
-
-MARK LINK_2
-LINK 2
-REPL DUPE_3
-;REPL DUPE_7
-JUMP DUPE_13
-MARK LINK_3
-LINK 3
-REPL DUPE_5
-;REPL DUPE_11
-JUMP DUPE_2
-MARK LINK_5
-LINK 5
-REPL DUPE_7
-;REPL DUPE_13
-JUMP DUPE_3
-MARK LINK_7
-LINK 7
-REPL DUPE_11
-;REPL DUPE_2
-JUMP DUPE_5
-MARK LINK_11
-LINK 11
-REPL DUPE_13
-;REPL DUPE_3
-JUMP DUPE_11
-MARK LINK_13
-LINK 13
-REPL DUPE_2
-;REPL DUPE_5
-JUMP DUPE_11
+MARK GO
+  LINK X
+  REPL TRY_5_7
+  REPL TRY_11_13
+MARK TRY_2_3
+  COPY 2 X
+  REPL GO
+  COPY 3 X
+  REPL GO
+  JUMP WAIT2
+MARK TRY_5_7
+  COPY 5 X
+  REPL GO
+  COPY 7 X
+  REPL GO
+  JUMP WAIT1
+MARK TRY_11_13
+  COPY 11 X
+  REPL GO
+  COPY 13 X
+  REPL GO
+  JUMP WAIT
+MARK WAIT2
+  NOOP
+MARK WAIT1
+  NOOP
+MARK WAIT
+  REPL WAIT
+  JUMP WAIT
 ```
 

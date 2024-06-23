@@ -1,0 +1,35 @@
+LINK 800
+REPL HP
+MARK M
+  @REP 2
+  LINK -3
+  @END
+  MARK M_READ
+    COPY #NERV X
+    REPL M_WRITE
+    JUMP M_READ
+  MARK M_WRITE
+    @REP 4
+    LINK 3
+    @END
+    COPY X #NERV
+    HALT
+MARK HP
+  @REP 3
+  LINK 3
+  @END
+  MARK HP_READ
+    COPY #NERV X
+    LINK 3
+    COPY #NERV T
+    LINK -3
+    REPL HP_WRITE
+    JUMP HP_READ
+  MARK HP_WRITE
+    @REP 6
+    LINK -3
+    @END
+    COPY X #NERV
+    LINK -3
+    COPY T #NERV
+    HALT
