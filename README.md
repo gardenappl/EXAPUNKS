@@ -6,7 +6,7 @@ This is a fork of [starbust997's repo](https://github.com/starburst997/EXAPUNKS)
 
 ## Solutions
 
-My solutions are not record-breaking but typically average or better.
+My solutions are not record-breaking, but typically average or better.
 
 In most levels I aimed for reducing cycle count, however in some levels (mainly the Visual Cortex and Last Stop Warehouse) I thought it'd be more fun to go for minimal activity by using a lot of networking.
 
@@ -48,7 +48,7 @@ There are not a lot of comments in my code, however there is some indentation so
 | [30: Holman Dynamics (Sales System)](solutions/30-holman-dynamics-sales-system) | 5619   | 130  | 3        |
 | [31: US Government (Fema Genetic Database)](solutions/31-us-government-fema-genetic-database) | 809    | 126  | 45       |
 | [32: Unknown Network 2 (Unknown Context)](solutions/32-unknown-network-2-unknown-context) | 108    | 74   | 53       |
-| 33: TEC EXA-Blaster Modem (Pager Network) | N/A | N/A | N/A |
+| [33: TEC EXA-Blaster Modem (Pager Network)](solutions/33-tec-exa-blaster-modem-pager-network) | 805    | 52   | 9        |
 | 34: Mitsuzen HDI-10 (Cerebral Cortex) | N/A | N/A | N/A |
 #### Battles
  * [1: KGOG-TV (Programming Hub)](battles/01-kgog-tv-programming-hub)
