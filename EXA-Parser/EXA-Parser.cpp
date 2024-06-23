@@ -401,7 +401,7 @@ int main(int argc, char* argv[])
 				if (solutionEntry == solutions.end()) {
 					readmeOut << "| " << to_string(i + 1) << ": " << info.title << " | N/A | N/A | N/A |" << endl;
 				} else {
-					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](bonus/" << info.path << ") ";
+					readmeOut << "| [" << to_string(i + 1) << ": " << info.title << "](solutions/" << info.path << ") ";
 
 					Solution solution = solutionEntry->second;
 					readmeOut << "| ";
