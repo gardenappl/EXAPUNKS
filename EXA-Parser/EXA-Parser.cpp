@@ -272,13 +272,12 @@ int main(int argc, char* argv[])
 				break;
 			}
 		}
-
 		solutionStream.read(reinterpret_cast<char*>(&i), sizeof(i));
 
 		Solution solution = {
 			id,
 			name,
-			100, // TODO: Not saved in the file format?
+			0, 
 			0,
 			0,
 			cycles,
@@ -286,6 +285,12 @@ int main(int argc, char* argv[])
 			activity,
 			entry.path()
 		};
+		// TODO: Battle data not saved in the file format?
+		if (find(battles.begin(), battles.end(), id) != battles.end())
+			solution.wins = 100;
+
+		if (solution.cycles == 0 && solution.wins == 0)
+			continue;
 
 		for (int j = 0; j < i; j++) {
 			solutionStream.ignore(); // Magic 0xA
@@ -310,19 +315,14 @@ int main(int argc, char* argv[])
 			Solution old = solutions[id];
 			if (old.cycles > solution.cycles) {
 				cout << "  + " << id << ": " << name << endl;
-
 				solutions[id] = solution;
 			}
 			else {
 				cout << "  - " << id << ": " << name << endl;
 			}
-		}
-		else if (solution.cycles > 0 || find(battles.begin(), battles.end(), id) != battles.end()) {
-			cout << "    " << id << ": " << name << endl;
-
-			solutions[id] = solution;
 		} else {
-			cout << "  - " << id << ": " << name << endl;
+			cout << "    " << id << ": " << name << endl;
+			solutions[id] = solution;
 		}
 	}
 
