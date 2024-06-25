@@ -8,7 +8,7 @@ This is a fork of [starbust997's repo](https://github.com/starburst997/EXAPUNKS)
 
 My solutions are not record-breaking, but typically average or better.
 
-In most levels I aimed for reducing cycle count, however in some levels (mainly the Visual Cortex and Last Stop Warehouse) I thought it'd be more fun to go for minimal activity by using a lot of networking.
+In most levels I aimed for reducing cycle count while keeping the code simple and readable. In some levels (mainly the Visual Cortex and Last Stop Warehouse) I thought it'd be more fun to go for minimal activity by using a lot of networking.
 
 There are not a lot of comments in my code, however there is some indentation so that "functions" and some branches stand out more.
 
@@ -71,4 +71,6 @@ There are not a lot of comments in my code, however there is some indentation so
 | 9: Your Computer (Unknown Context) | N/A | N/A | N/A |
 <!-- EXA_END -->
 
-I have not completed all the levels yet as of the time of writing.
+## TODO
+ [ ] Bonuses
+ [ ] Sort out the battles
