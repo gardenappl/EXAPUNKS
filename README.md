@@ -49,7 +49,7 @@ There are not a lot of comments in my code, however there is some indentation so
 | [31: US Government (Fema Genetic Database)](solutions/31-us-government-fema-genetic-database) | 809    | 126  | 45       |
 | [32: Unknown Network 2 (Unknown Context)](solutions/32-unknown-network-2-unknown-context) | 108    | 74   | 53       |
 | [33: TEC EXA-Blaster Modem (Pager Network)](solutions/33-tec-exa-blaster-modem-pager-network) | 805    | 52   | 9        |
-| 34: Mitsuzen HDI-10 (Cerebral Cortex) | N/A | N/A | N/A |
+| [34: Mitsuzen HDI-10 (Cerebral Cortex)](solutions/34-mitsuzen-hdi-10-cerebral-cortex) | 1619   | 141  | 89       |
 #### Battles
  * [1: KGOG-TV (Programming Hub)](battles/01-kgog-tv-programming-hub)
  * [2: Valhalla (=Plastered)](battles/02-valhalla-plastered)
