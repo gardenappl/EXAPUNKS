@@ -72,5 +72,5 @@ There are not a lot of comments in my code, however there is some indentation so
 <!-- EXA_END -->
 
 ## TODO
- [ ] Bonuses
- [ ] Sort out the battles
+ - [ ] Bonuses
+ - [ ] Sort out the battles
